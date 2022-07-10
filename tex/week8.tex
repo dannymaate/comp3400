@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+
+\title{Functors Applicatives}
+\author{d.morgan1}
+\date{July 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{Functors}
+Functors increase the level of generality in Haskell. Think of them as functions over a range of parameterised types such as lists, trees. \newline
+
+\noindent Functors have both an \textcolor{Mulberry}{infix notation} where \texttt{\textcolor{Emerald}{(<\$>) = fmap}, e.g. fmap (>1) [1,2,3]} and a \textcolor{Mulberry}{prefix notation} where \texttt{\textcolor{Emerald}{fmap (g.h) = fmap g . fmap h}, e.g. (>1) <\$> (Just 1)}
+
+\paragraph{Functor Laws}
+\begin{enumerate}
+  \item \texttt{fmap id = id}
+  \item \texttt{fmap (g.h) = fmap g . fmap h}
+\end{enumerate}
+
+\paragraph{Application of Composition}
+(f.g) x, f.g $ x, f $ g x, f $ g $ x
+
+\paragraph{Structural Induction}
+Suppose S is some \textcolor{Mulberry}{recursively defined structure} (e.g. [a] or Tree a) that has \textcolor{Mulberry}{substructure} (e.g. sublist, subtree) and there is \textcolor{Mulberry}{partial order}{e.g. length or number of nodes}. 
+\\
+\textcolor{Mulberry}{Structural induction} implies if...
+\begin{enumerate}
+  \item P is true for \textcolor{Mulberry}{all minimum structures}, and     (Base Case)
+  \item P(x') is true for x' any \textcolor{Mulberry}{immediate substructure} of x (Induction)
+\end{enumerate}
+
+\section{Applicatives}
+Functors can map a function over each element in a structure. Suppose we wish to generalise the idea to allow functions with \textcolor{Mulberry}{any number of arguments} to be mapped. 
+
+\paragraph{Applicative Laws}
+\begin{enumerate}
+  \item \texttt{pure id <*> x = x} \textcolor{Mulberry}{\emph{mapping identity has no effect}}
+  \item \texttt{pure (g x) = pure g <*> pure x} \textcolor{Mulberry}{\emph{pure distribution}}
+  \item \texttt{x <*> pure y = pure (\g -> g y) <*> x} \textcolor{Mulberry}{\emph{effectful function disregards evaluation order}}
+  \item \texttt{x <*> (y <*> z) = (pure (.) <*> x <*> y) <*> z} \textcolor{Mulberry}{\emph{associativity}}
+\end{enumerate}
+
+\paragraph{Corollary}
+\verb|g <$> x = pure g <*> x|
+
+\paragraph{Effectful Programming}
+Applicative functors abstract the idea of applying \textcolor{Mulberry}{pure functions} to \textcolor{Mulberry}{effectful arguments}, where the effects depend on the underlying functor. Effects may be: possibility of failure, having many ways to succeed or I/O actions. \newline 
+ 
+\subsubsection*{Applicative Style}
+Note that: \textcolor{Emerald}{\texttt{fmap g x = pure g <*> x}}, so this means 
+\begin{quote}
+\textcolor{Emerald}{\texttt{pure g <*> x1 <*> x2 <*> ... <*> xn}}\par 
+\end{quote}
+is same as
+\begin{quote}
+\newline\textcolor{Emerald}{\texttt{g <\$> x1 <*> x2 <*> ... <*> xn}}
+\end{quote}
+\end{document}
