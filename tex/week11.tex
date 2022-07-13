@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+
+\title{Interactive Programming}
+\author{dannymaate}
+\date{13 July 2022}
+
+\begin{document}
+\maketitle
+
+\section{IO}
+Interactive programs by nature require the side effects of taking additional inputs and producing additional outputs. IO is \textcolor{Rhodamine}{\emph{impure}} (writing to files, throwing exceptions).
+
+\subsubsection*{Purity in Haskell}
+In Haskell, interactive programs are pure functions that accept the current \emph{state of the world} as an argument and produce a modified world as the result, as well as a result value.
+
+\begin{verbatim}
+    type IO a = World -> (a, World)
+\end{verbatim}
+\emph{a state transformer with a state world.}
+Expressions with type IO are \textcolor{Rhodamine}{\emph{actions}}
+
+\subsubsection*{Basic IO Actions}
+\texttt{getChar :: IO Char} \newline
+\texttt{getChar = ...} \emph{\textcolor{Brown}{reads a character}} \newline
+
+\noindent \texttt{putChar :: Char -> IO()} \newline
+\texttt{putChar c = ...} \emph{\textcolor{Brown}{writes a character c.}}
+\textcolor{Rhodamine}{\emph{Note: () is an IO dummy value that doesn't return anything}} \newline
+
+\noindent \texttt{getLine :: IO string} \newline
+\noindent \texttt{putStr :: String -> IO ()} \newline
+\noindent \texttt{putStrLn :: String -> IO ()}
+
+\paragraph{Monad}
+Say you didn't care for the return value and want to perform a \textcolor{Rhodamine}{\emph{bind}}.\textcolor{Emerald}{\emph{You'd use the (>>)}}.
+
+\subsubsection*{Useful String Functions}
+\begin{verbatim}
+    show :: Show a => a -> String
+    read :: Read a => String -> a
+
+    > show 123
+    "123"
+
+    > read "123" :: Int
+    123
+
+
+
+\end{verbatim}
+\end{document}
