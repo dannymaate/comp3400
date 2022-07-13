@@ -4,7 +4,7 @@
 \usepackage[a4paper, total={6in, 10in}]{geometry}
 
 \title{Functors Applicatives}
-\author{d.morgan1}
+\author{dannymaate}
 \date{July 2022}
 
 \begin{document}
@@ -41,7 +41,7 @@ Functors can map a function over each element in a structure. Suppose we wish to
 \begin{enumerate}
   \item \texttt{pure id <*> x = x} \textcolor{Mulberry}{\emph{mapping identity has no effect}}
   \item \texttt{pure (g x) = pure g <*> pure x} \textcolor{Mulberry}{\emph{pure distribution}}
-  \item \texttt{x <*> pure y = pure (\g -> g y) <*> x} \textcolor{Mulberry}{\emph{effectful function disregards evaluation order}}
+  \item \texttt{x <*> pure y = pure (\textbackslash{}g -\> g y) <*> x} \textcolor{Mulberry}{\emph{effectful function disregards evaluation order}}
   \item \texttt{x <*> (y <*> z) = (pure (.) <*> x <*> y) <*> z} \textcolor{Mulberry}{\emph{associativity}}
 \end{enumerate}
 

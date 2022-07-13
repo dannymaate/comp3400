@@ -11,10 +11,10 @@
 \maketitle
 
 \section{IO}
-Interactive programs by nature require the side effects of taking additional inputs and producing additional outputs. IO is \textcolor{Rhodamine}{\emph{impure}} (writing to files, throwing exceptions).
+Interactive programs by nature require the side effects of taking additional inputs and producing additional outputs. IO is \textcolor{Rhodamine}{\emph{impure}} (writing to files, throwing exceptions). 
 
 \subsubsection*{Purity in Haskell}
-In Haskell, interactive programs are pure functions that accept the current \emph{state of the world} as an argument and produce a modified world as the result, as well as a result value.
+In Haskell, interactive programs are pure functions that accept the current \emph{state of the world} as an argument and produce a modified world as the result, as well as a result value. 
 
 \begin{verbatim}
     type IO a = World -> (a, World)
@@ -30,7 +30,7 @@ Expressions with type IO are \textcolor{Rhodamine}{\emph{actions}}
 \texttt{putChar c = ...} \emph{\textcolor{Brown}{writes a character c.}}
 \textcolor{Rhodamine}{\emph{Note: () is an IO dummy value that doesn't return anything}} \newline
 
-\noindent \texttt{getLine :: IO string} \newline
+\noindent \texttt{getLine :: IO string} \newline 
 \noindent \texttt{putStr :: String -> IO ()} \newline
 \noindent \texttt{putStrLn :: String -> IO ()}
 
@@ -41,14 +41,14 @@ Say you didn't care for the return value and want to perform a \textcolor{Rhodam
 \begin{verbatim}
     show :: Show a => a -> String
     read :: Read a => String -> a
-
-    > show 123
+    
+    > show 123 
     "123"
-
-    > read "123" :: Int
+    
+    > read "123" :: Int 
     123
 
-
-
+    
+    
 \end{verbatim}
 \end{document}

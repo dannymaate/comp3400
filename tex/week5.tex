@@ -4,7 +4,7 @@
 \usepackage[a4paper, total={6in, 10in}]{geometry}
 
 \title{Recursion}
-\author{d.morgan1}
+\author{dannymaate}
 \date{12 July 2022}
 
 \begin{document}
@@ -16,7 +16,7 @@ When pattern matching on \textcolor{Emerald}{\texttt{num}} types you must includ
 \newline Note to check if an input is less than zero, the \textcolor{Rhodamine}{\emph{type has to be an instance of}} \textcolor{Emerald}{\texttt{Ord}}.
 
 \subsection*{Primitive Recursion*}
-A function \textcolor{Emerald}{\texttt{f :: Integer -> Integer}} is defined by \textcolor{Rhodamine}{\emph{primitive recursion}} if
+A function \textcolor{Emerald}{\texttt{f :: Integer -> Integer}} is defined by \textcolor{Rhodamine}{\emph{primitive recursion}} if 
 \begin{enumerate}
     \item some \textcolor{Rhodamine}{\emph{base case}} \emph{f(0)} is given outright (e.g. no more calls to any function), \textbf{\textcolor{Rhodamine}{and}}
     \item \emph{f(n)} (for n $>$ 0) is defined in terms of \emph{n} and \emph{f(n - 1)}, \textcolor{Rhodamine}{\emph{e.g. factorial, power}}.
@@ -26,7 +26,7 @@ A function \textcolor{Emerald}{\texttt{f :: Integer -> Integer}} is defined by \
 A function definition where each execution \textcolor{Rhodamine}{\emph{calls itself at most once}}.
 
 \subsection*{Tail Recursion*}
-A function is \textcolor{Rhodamine}{\emph{tail recursive}} or \textcolor{Rhodamine}{\emph{iterative}} if each execution of the function either
+A function is \textcolor{Rhodamine}{\emph{tail recursive}} or \textcolor{Rhodamine}{\emph{iterative}} if each execution of the function either 
 \begin{enumerate}
     \item is a \textcolor{Rhodamine}{\emph{base case}} that has no more calls to any functions, \textbf{\textcolor{Rhodamine}{or}}
     \item the function \textcolor{Rhodamine}{\emph{calls itself only}} with different values for arguments
@@ -36,11 +36,11 @@ A function is \textcolor{Rhodamine}{\emph{tail recursive}} or \textcolor{Rhodami
 \paragraph{Iteration Invariant}
 A property of the algorithm that must be true regardless of the winding phase, e.g. the \textcolor{Rhodamine}{\emph{iteration invariant}} for the tail recursive fact is \texttt{\textcolor{Emerald}{h\_fact ans n} = ans.n!}
 \begin{verbatim}
-    h_fact ans 0 = ans
+    h_fact ans 0 = ans 
     h_fact ans n = h_fact (ans*n) * (n - 1)
 \end{verbatim}
 
-\paragraph{Termination Checking}
+\paragraph{Termination Checking} 
 To prove a tail recursive algorithm \textcolor{Rhodamine}{\emph{terminates}} the \textcolor{Rhodamine}{\emph{bound value}} must be
 \begin{enumerate}
     \item always \textcolor{Rhodamine}{\emph{non-negative}} and
