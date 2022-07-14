@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+
+\title{Higher Order Functions and Algebraic Datatypes}
+\author{dannymaate}
+\date{13 July 2022}
+
+\begin{document}
+\maketitle
+
+\section{Higher Order Functions}
+Higher order functions capture common programming patterns as functions. In practice, they accept functions as arguments. \newline
+
+\noindent \textcolor{Rhodamine}{\emph{Map}} applies a function to all elements of a list, e.g. \texttt{map(2*) [1..10]}
+
+\noindent \textcolor{Rhodamine}{\emph{Zip}} combines two lists into a single list of tuples, e.g. \texttt{zipWith(+) [1,2,3] [4,5,6,7,8]}
+
+\noindent \textcolor{Rhodamine}{\emph{Filter}} selects all elements of a list that satisfy some predicate, e.g. \texttt{filter(> 5) [1..10]}
+
+\subsection*{Folds}
+Many functions that accept a list are defined with the following pattern of recursion. Folds are left or right, this is an indicator of the associativity of the funtion being folded. \newline
+\texttt{f []        = v} \newline
+\texttt{f (x:xs)    = x \# f xs} \emph{\textcolor{Brown}{operator \# is applied to the head and result of recursion on tail}}
+
+\begin{verbatim}
+    sum :: Num a => [a] -> a
+    sum = foldr (+) 0
+
+    product :: Num a => [a] -> a
+    product = foldr (*) 1
+
+    or :: [Bool] -> Bool
+    or = foldr (||) False
+
+    and :: [Bool] -> Bool
+    and = foldr (&&) True
+
+    foldr :: (a -> b -> b) -> b -> [a] -> b
+\end{verbatim}
+The behaviour of fold can be summarised as follows \newline \texttt{foldr (\#) v [x0, x1,...,xn] = x0 \# (x1 \# (... (xn \# v) ...))}. \newline
+\texttt{foldl (\#) v [x0, x1,...,xn] = (... ((v \# x0) \# x1) ...) \# xn}
+
+\subsubsection*{Composition Operator}
+\begin{verbatim}
+    (.) :: (b -> c) -> (a -> b) -> (a -> c)
+    f . g = \x -> f (g x)
+\end{verbatim}
+
+\section{Algebraic Datatypes}
+To declare a new type introduce a new name for an existing type, e.g.
+\texttt{type Pos = (Int, Int)}.
+The \textcolor{Emerald}{\texttt{data}} mechanism is another way to declare a new type: \newline
+\texttt{data Bool = False | True} \textcolor{Rhodamine}{\emph{type constructor}} \textcolor{Emerald}{\texttt{Bool}} \emph{and} \textcolor{Rhodamine}{\emph{data constructors}} \textcolor{Emerald}{\texttt{False}} \emph{and} \textcolor{Emerald}{\texttt{True}}
+
+\subsubsection*{Stages of Execution}
+\textcolor{NavyBlue}{Compile-Time} When a program is read into the REPL or \textcolor{Rhodamine}{\emph{compile}} type checking occurs. \newline
+\textcolor{NavyBlue}{Runtime} Our program is \textcolor{Rhodamine}{\emph{interpreted}} into execution. \textcolor{Rhodamine}{\emph{Data can be created}} and expressions can be evaluated.
+
+\paragraph{newtype} If a new type has a single constructor and argument, then declare it with the \texttt{newtype} mechanism. \newline
+\texttt{newtype Nat = N Int       } \texttt{\textcolor{Emerald}{N}} \textcolor{Rhodamine}{\emph{takes a single argument of type}} \texttt{\textcolor{Emerald}{Int}} \newline
+
+\noindent Differences with using \textcolor{Emerald}{\texttt{newtype}} vs. \textcolor{Emerald}{\texttt{type}} vs.
+\textcolor{Emerald}{\texttt{data}}? \newline
+\noindent\textcolor{Emerald}{\texttt{Nat}} and \textcolor{Emerald}{\texttt{Int}} are different types and not synonymous.
+Using \textcolor{Emerald}{\texttt{newtype}} over \textcolor{Emerald}{\texttt{data}} brings an efficiency benefit that improves type safety
+
+
+\end{document}
